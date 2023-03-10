@@ -1,2 +1,2 @@
 # activity-world
-Sketching ideas for an ActiityPub MU*
+Sketching ideas for an ActivityPub MU*
