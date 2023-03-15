@@ -1,0 +1,5 @@
+node_modules
+dist/bundle.js*
+infra/terraform.tfvars
+infra/.terraform
+infra/terraform.tfstate*
