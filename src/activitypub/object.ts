@@ -1,18 +1,5 @@
-import { randInt } from '../util'
 import { type Actor } from './actor'
-import { BaseObject } from './base'
-
-export class APObject extends BaseObject {
-  type = ''
-  constructor () {
-    super()
-    const id = `${this.baseUrl}/object/${randInt(1000000)}`
-    this.data = {
-      type: this.type,
-      id
-    }
-  }
-}
+import { type ActivityStream, BaseObject } from './base'
 
 interface NoteData {
   attributedTo: Actor
@@ -20,16 +7,19 @@ interface NoteData {
   published: string
   inReplyTo?: string
   content: string
-  // TODO: this need an ActivityStream type
-  to: string
+  to: ActivityStream
 }
 
-export class Note extends APObject {
+export class Note extends BaseObject {
+  types = 'Note'
+  attributedTo: Actor
   constructor (data: NoteData) {
     super()
+    this.attributedTo = data.attributedTo
     this.data = {
-      ...this.data,
-      ...data
+      ...this.getBaseData(),
+      ...data,
+      attributedTo: this.attributedTo.id
     }
   }
 }

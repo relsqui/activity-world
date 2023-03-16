@@ -1,11 +1,15 @@
 import { BaseObject } from './base'
 
 export class Actor extends BaseObject {
-  type = ''
+  type = 'Actor'
+}
+
+export class Person extends Actor {
+  type = 'Person'
   constructor (name: string) {
     super()
-    this.id = `${this.baseUrl}/actor/${name}`
     this.data = {
+      ...this.getBaseData(),
       type: this.type,
       preferredUsername: name,
       inbox: `${this.baseUrl}/inbox/${name}`,
@@ -16,8 +20,4 @@ export class Actor extends BaseObject {
       }
     }
   }
-}
-
-export class Person extends Actor {
-  type = 'Person'
 }

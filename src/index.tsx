@@ -1,7 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Create } from './activitypub/activity'
+import { Person } from './activitypub/actor'
+import { ActivityStream } from './activitypub/base'
+import { Note } from './activitypub/object'
 
-import { apiRequest } from './api'
+// import { apiRequest } from './api'
 
 function getParams (): any {
   const searchParams = new URLSearchParams(document.location.search)
@@ -12,8 +16,19 @@ function getParams (): any {
   return params
 }
 
+function createNote (): Create {
+  const actor = new Person('foo')
+  const note = new Note({
+    attributedTo: actor,
+    published: 'now',
+    content: 'hi',
+    to: new ActivityStream()
+  })
+  return new Create(actor, note)
+}
+
 function Main (props?: any): React.ReactElement {
-  return <pre>{apiRequest('actor', { name: props.actor })}</pre>
+  return <pre>{JSON.stringify(createNote(), null, 2)}</pre>
 }
 
 const rootNode = document.getElementById('root')
