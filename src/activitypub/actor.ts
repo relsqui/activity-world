@@ -1,21 +1,23 @@
 import { BaseObject } from './base'
 
-const baseUrl = 'https://example.com'
-
 export class Actor extends BaseObject {
+  type = ''
   constructor (name: string) {
     super()
-    const id = `${baseUrl}/people/${name}`
+    this.id = `${this.baseUrl}/actor/${name}`
     this.data = {
-      id,
-      type: 'Person',
+      type: this.type,
       preferredUsername: name,
-      inbox: `${baseUrl}/inbox/${name}`,
+      inbox: `${this.baseUrl}/inbox/${name}`,
       publicKey: {
-        id: `${id}#main-key`,
-        owner: id,
+        id: `${this.id}#main-key`,
+        owner: this.id,
         publicKeyPem: "--- Look at me I'm a public key. ---"
       }
     }
   }
+}
+
+export class Person extends Actor {
+  type = 'Person'
 }

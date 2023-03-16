@@ -1,4 +1,4 @@
-import { Actor } from './ap-objects/actor'
+import { Actor } from './activitypub/actor'
 
 const methods: any = {
   actor: ({ name }: { name: string }) => { return new Actor(name).getJson() }
